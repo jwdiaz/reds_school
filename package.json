@@ -1,30 +1,23 @@
 {
-  "name": "reds_school",
+  "name": "servidor",
   "version": "1.0.1",
-  "description": "Primer scipt grupo Reds, Proyecto NodeJs tecnologico de antioquia",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jwdiaz/reds_school.git"
-  },
-  "author": "Reds",
+  "author": "jamesdiaz1",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jwdiaz/reds_school/issues"
-  },
-  "homepage": "https://github.com/jwdiaz/reds_school#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
-    "express-session": "^1.16.1",
-    "express-validator": "^5.3.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "timeago.js": "^4.0.0-beta.2"
+    "fs": "0.0.1-security",
+    "hbs": "^4.0.4",
+    "jquery": "^3.4.1",
+    "nodemon": "^1.19.1",
+    "path": "^0.12.7",
+    "popper.js": "^1.15.0"
   }
 }

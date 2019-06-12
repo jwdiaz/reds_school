@@ -1,0 +1,37 @@
+
+{{>header }}
+
+    {{>menu-aspirante}}
+    <h2>Proceso Inscripción</h2>
+    <hr/>
+
+    {{#if existeUsuarioCurso}}
+    <div class="alert alert-danger" role="alert">
+        El usuario ya ha realizado una inscripción a este curso.
+    </div>
+    {{/if}}
+
+    {{#if guardado}}
+        <div class="alert alert-success" role="alert">
+            La inscripción se guardó correctamente.
+        </div>
+    {{/if}}
+
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <form action="/guardar-proceso-inscripcion1" method="post">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="curso">Curso * </label>
+                        <select class="form-control" id="idCurso" name="idCurso">
+                            {{#each cursos}}
+                                <option value="{{idCurso}}">{{nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    
+                <button type="submit" class="btn btn-primary px-4 float-right">Guardar</button>
+            </form>
+        </div>
+    </div>
+{{>footer }}

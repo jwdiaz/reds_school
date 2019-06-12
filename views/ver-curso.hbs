@@ -1,0 +1,76 @@
+{{>header }}
+    {{> menu-aspirante}}
+    <h2>Ver Curso</h2>
+    <hr/>
+
+    <div class="row">
+        <fieldset>
+        <div class="col-md-12 mx-auto">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="idCurso">Id Curso: </label>
+                    {{curso.idCurso}}
+                </div>
+                <div class="col-sm-6">
+                    <label for="nombre">Nombre: </label>
+                    {{curso.nombre}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="descripcion">Descripción: </label>
+                    {{curso.descripcion}}
+                </div>
+                <div class="col-sm-6">
+                    <label for="valor">Valor ($): </label>
+                    ${{curso.valor}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="modalidad">Modalidad: </label>
+                    {{curso.modalidad}}
+                </div>
+                <div class="col-sm-6">
+                    <label for="intensidadHoraria">Intensidad Horaria: </label>
+                    {{#if curso.intensidad}}
+                        {{curso.intensidad}} horas
+                    {{/if}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="modalidad">Estado: </label>
+                    {{curso.estado}}
+                </div>
+                <div class="col-sm-6">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+        </fieldset>
+    </div>
+
+    <div class="container p-4">
+    <div class="row">
+        {{#each cursos}}
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <a href="/ver-curso/{{idCurso}}">
+                        <h3 class="card-title text-uppercase">
+                           {{ nombre }}
+                        </h3>
+                    </a>
+                    <p class="m-2">{{description}}</p>
+                    <p class="text-muted">
+                       Inversión:  {{ valor }}
+                    </p>                    
+                </div>
+            </div>
+        </div>  
+
+         {{/each}}     
+    </div>
+ </div>  
+{{>footer }}
