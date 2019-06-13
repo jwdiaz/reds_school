@@ -10,6 +10,7 @@ app.use("/css", express.static(dirNode_modules + "/bootstrap/dist/css"));
 app.use("/js", express.static(dirNode_modules + "/jquery/dist"));
 app.use("/js", express.static(dirNode_modules + "/popper.js/dist"));
 app.use("/js", express.static(dirNode_modules + "/bootstrap/dist/js"));
+app.use(express.static('public'));
 
 const directorioPartials = path.join(__dirname, "../partials");
 
@@ -272,6 +273,8 @@ app.get("/login-usuario", function(req, res) {
     return item.documento == iddocumento;
   });
 
+  console.log("Informacion user es " + user)
+
   if (user[0].tipo === "aspirante") {
     res.locals = {
       midocumento:iddocumento,
@@ -290,6 +293,8 @@ app.get("/login-usuario", function(req, res) {
       };
       
 
+    } else {
+      res.render(path.join(__dirname + "/views/error.hbs"));
     }
   });
 
