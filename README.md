@@ -6,5 +6,5 @@ Antes de iniciar, correr el comando **npm install**, esto instalara las dependen
 
 # Cómo correr el servidor ?
 
-**npm run start** y luego ingresar a **http://localhost:3000** 
+**npm run dev** y luego ingresar a **http://localhost:3000** 
 

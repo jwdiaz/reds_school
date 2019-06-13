@@ -168,7 +168,7 @@ app.get("/eliminar-inscritos", function(req, res) {
     cursos: cursos.filter(function(item) {
       return item.estado === "disponible";
     }),
-    inscritos: inscritos,
+    inscritos: inscritos, 
     usuarios: usuarios
   };
   res.render(path.join(__dirname + "/views/eliminar-inscritos.hbs"));
@@ -239,8 +239,33 @@ app.get("/ver-curso/:id", function(req, res) {
   res.render(path.join(__dirname + "/views/ver-curso.hbs"));
 });
 
+app.get("/ver-curso/", function(req, res) {
+  var usuariosRegistrados = JSON.parse(fs.readFileSync("usuariosRegistrados.json", "utf8"));
+  var cursos = JSON.parse(fs.readFileSync("cursos.json", "utf8"));
+  var inscritos = JSON.parse(fs.readFileSync("inscritos.json", "utf8"));
+  inscrito = inscritos.filter( item => item.documento = usuariosRegistrados[0]);
+  
+  cursosInscritos = []
+  for (var i = 0; i < inscrito.length; i++) {
+    curso = cursos.filter(function(item) {
+      return item.idCurso === inscrito[i].idCurso;
+    });    
+    cursosInscritos.push(curso)
+  }
+
+  console.log("cursos inscritos " + cursosInscritos)
+  /** curso = cursos.filter(function(item) {
+    return item.idCurso === id;
+  });**/
+  res.locals = {
+    curso: cursos[0]
+  };
+  res.render(path.join(__dirname + "/views/ver-curso.hbs"));
+});
+
 app.get("/proceso-inscripcion1/", function(req, res) {
-  var cursos = JSON.parse(fs.readFileSync("usuarios.json", "utf8"));
+  var cursos = JSON.parse(fs.readFileSync("cursos.json", "utf8"));
+  console.log(cursos)
   res.locals = {
     cursos: cursos.filter(function(item) {
       return item.estado === "disponible";
@@ -261,8 +286,13 @@ app.get("/proceso-inscripcion/", function(req, res) {
 
 app.get("/login-usuario", function(req, res) {
   var usuarios = JSON.parse(fs.readFileSync("usuarios.json", "utf8"));
-
+  var usuariosRegistrados = JSON.parse(fs.readFileSync("usuariosRegistrados.json", "utf8"));
+ 
   const iddocumento = req.query.documento;
+  usuariosRegistrados.push({
+     documento: iddocumento
+  });
+  escribirArchivo("usuariosRegistrados.json", usuariosRegistrados);
 
   var existeUsuario = usuarios.some(function(item) {
     return item.documento === iddocumento;
@@ -273,7 +303,7 @@ app.get("/login-usuario", function(req, res) {
     return item.documento == iddocumento;
   });
 
-  console.log("Informacion user es " + user)
+
 
   if (user[0].tipo === "aspirante") {
     res.locals = {
@@ -299,7 +329,7 @@ app.get("/login-usuario", function(req, res) {
   });
 
 
-app.post("/guardar-proceso-inscripcion/", function(req, res) {
+app.post("/guardar-proceso-inscripcion1/", function(req, res) {
   var cursos = JSON.parse(fs.readFileSync("cursos.json", "utf8"));
   var inscritos = JSON.parse(fs.readFileSync("inscritos.json", "utf8"));
   var usuarios = JSON.parse(fs.readFileSync("usuarios.json", "utf8"));
@@ -414,6 +444,11 @@ app.listen(3000, function() {
       escribirArchivo("inscritos.json", []);
     }
   });
+});
+
+app.get("/logout", (req, res) => {
+  escribirArchivo("usuariosRegistrados.json", []);
+  res.render(path.join(__dirname + "/views/login.hbs"));
 });
 
 function escribirArchivo(nombre, contenido) {
