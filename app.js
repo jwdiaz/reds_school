@@ -131,6 +131,16 @@ app.get("/listar-cursos", function(req, res) {
   res.render(path.join(__dirname + "/views/listar-cursos.hbs"));
 });
 
+app.get("/listarCursos", function(req, res) {
+  var cursos = JSON.parse(fs.readFileSync("cursos.json", "utf8"));
+  res.locals = {
+    cursos: cursos.filter(function(item) {
+      return item.estado === "disponible";
+    })
+  };
+  res.render(path.join(__dirname + "/views/listaCursos.hbs"));
+});
+
 app.get("/listar-cursos-usuario", function(req, res) {
   var cursos = JSON.parse(fs.readFileSync("cursos.json", "utf8"));
   var inscritos = JSON.parse(fs.readFileSync("inscritos.json", "utf8"));
@@ -367,7 +377,7 @@ app.post("/guardar-proceso-inscripcion1/", function(req, res) {
     guardado: guardado,
     existeUsuarioCurso: existeUsuarioCurso
   };
-  res.render(path.join(__dirname + "/views/proceso-inscripcion.hbs"));
+  res.render(path.join(__dirname + "/views/proceso-inscripcion-aspirante.hbs"));
 });
 
 app.post("/guardar-usuario/", function(req, res) {
