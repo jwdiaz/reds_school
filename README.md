@@ -8,3 +8,5 @@ Antes de iniciar, correr el comando **npm install**, esto instalara las dependen
 
 **npm run dev** y luego ingresar a **http://localhost:3000** 
 
+Para el perfil de Docente o coordinador acceder con documento 123.
+
